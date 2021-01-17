@@ -1,10 +1,11 @@
-package com.example.demo.entities;
+  	package com.example.demo.entities;
 
 import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -167,6 +168,12 @@ public abstract class Membre {
 
 	public void setEvenements(Collection<EvenementBean> evenements) {
 		this.evenements = evenements;
+	}
+	@Transient
+	public String getDiscriminatorValue(){
+	    DiscriminatorValue val = this.getClass().getAnnotation( DiscriminatorValue.class );
+
+	    return val == null ? null : val.value();
 	}
 	
 

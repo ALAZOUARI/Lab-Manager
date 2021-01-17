@@ -4,17 +4,18 @@
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Publication"/>
+		<item key="selection" value="affecter"/>
 		<item key="wrap" value="true"/>
 		<item key="incremental" value="false"/>
 		<list key="findhistory">
+			<item value="affecter"/>
+			<item value="/membres/etudiant"/>
+			<item value="param"/>
+			<item value="dele"/>
+			<item value="etudiantRepository"/>
+			<item value="update "/>
 			<item value="delete"/>
 			<item value="fei"/>
-			<item value="HATEOAS"/>
-			<item value="Outil"/>
-			<item value="Management"/>
-			<item value="Micro"/>
-			<item value="lombok"/>
 		</list>
 		<list key="replacehistory">
 		</list>

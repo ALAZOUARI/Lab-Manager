@@ -1,10 +1,11 @@
 package com.example.demo.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,8 @@ import com.example.demo.proxies.OutilProxy;
 import com.example.demo.proxies.PublicationProxy;
 import com.example.demo.service.IMemberService;
 
+// @CrossOrigin(origins = "*", allowedHeaders = "*")
+
 @RestController
 public class MembreRestController {
 	@Autowired
@@ -31,108 +34,147 @@ public class MembreRestController {
 	@Autowired
 	PublicationProxy publicationproxy;
 	@Autowired
-	OutilProxy outilProxy; 
+	OutilProxy outilProxy;
 	@Autowired
-	Evenementproxy evenementproxy; 
+	Evenementproxy evenementproxy;
 
 	@GetMapping(value = "/membres")
-	public List<Membre> findAllmembres()
-	{
+	public List<Membre> findAllmembres() {
 		return memberservice.findAll();
 	}
 
+	@GetMapping(value = "/membres/etudiants")
+	public List<Etudiant> findAllEtudiants() {
+		return memberservice.findAllEtudiants();
+	}
+
+	@GetMapping(value = "/membres/enseignants")
+	public List<EnseignantChercheur> findAllEnseignant() {
+		return memberservice.findAllEnseignants();
+	}
+
 	@GetMapping(value = "/membres/{id}")
-	public Membre findoneMembre(@PathVariable Long id)
-	{
+	public Membre findoneMembre(@PathVariable Long id) {
 		return memberservice.findMember(id);
 	}
-	
+
 	@PostMapping(value = "/membres/etudiant")
-	public Membre addMembre(@RequestBody Etudiant etd)
-	{
+	public Membre addMembre(@RequestBody Etudiant etd) {
 		return memberservice.addMember(etd);
 	}
 
 	@PostMapping(value = "/membres/enseignant")
-	public Membre addMembre(@RequestBody EnseignantChercheur ens)
-	{
+	public Membre addMembre(@RequestBody EnseignantChercheur ens) {
 		return memberservice.addMember(ens);
 	}
-	@PutMapping(value="/membres/etudiant/{id}")
-	public Membre updatemembre(@PathVariable Long id, @RequestBody Etudiant p)
-	{
+
+	@DeleteMapping(value = "/membres/{id}")
+	public void deletemembre(@PathVariable Long id) {
+		memberservice.deleteMember(id);
+	}
+
+	@DeleteMapping(value = "/membres/enseignant/{id}")
+	public void deleteEns(@PathVariable Long id) {
+		EnseignantChercheur ens = memberservice.findEnseignant(id);
+		for (Etudiant etd : ens.getListetud()) {
+			etd.setEncadrant(null);
+			memberservice.updateMember(etd);
+		}
+		memberservice.deleteMember(id);
+	}
+
+	@PutMapping(value = "/membres/etudiant/{id}")
+	public Membre updatemembre(@PathVariable Long id, @RequestBody Etudiant p) {
 		p.setId(id);
 		return memberservice.updateMember(p);
 	}
 
-	@PutMapping(value="/membres/enseignant/{id}")
-	public Membre updateMembre(@PathVariable Long id, @RequestBody EnseignantChercheur p)
-	{
+	@PutMapping(value = "/membres/enseignant/{id}")
+	public Membre updateMembre(@PathVariable Long id, @RequestBody EnseignantChercheur p) {
 		p.setId(id);
-	       return memberservice.updateMember(p);
+		return memberservice.updateMember(p);
 	}
-	@PutMapping(value="/membres/etudiant")
-	public Membre affecter(@RequestParam Long idetd , @RequestParam Long idens )
-	{
-		
-	       return memberservice.affecterencadrantToetudiant(idetd, idens);
+
+	@PutMapping(value = "/membres/etudiant")
+	public Membre affecterettoenc(@RequestParam Long idetd, @RequestParam Long idens) {
+
+		return memberservice.affecterencadrantToetudiant(idetd, idens);
 	}
+
+	@PutMapping(value = "/membres/auteur")
+	public void affecterauteurTopublication(@RequestParam Long idauteur, @RequestParam Long idpub) {
+
+		 memberservice.affecterauteurTopublication(idauteur, idpub);
+	}
+
+	@PutMapping(value = "/membres/developpeur")
+	public void affecterdeveloppeurTooutil(@RequestParam Long iddev, @RequestParam Long idout) {
+
+		memberservice.affecterdeveloppeurTooutil(iddev, idout);
+	}
+
+	@PutMapping(value = "/membres/organisateur")
+	public void affecterorganisateurToevt(@RequestParam Long idorg, @RequestParam Long idevt) {
+
+		memberservice.affecterorganisateurToevt(idorg, idevt);
+	}
+
 	@GetMapping("/publications")
-	public CollectionModel<PublicationBean> listerpublication()
-	{
+	public CollectionModel<PublicationBean> listerpublication() {
 		return publicationproxy.listeDesPublications();
-		
+
 	}
+
 	@GetMapping("/outils")
-	public CollectionModel<OutilBean> listeroutil(){
-		return outilProxy.listeDesoutils(); 
+	public CollectionModel<OutilBean> listeroutil() {
+		return outilProxy.listeDesoutils();
 	}
+
 	@GetMapping("/evenements")
-	public CollectionModel<EvenementBean> listerevenements(){
-		return evenementproxy.listeDesEvenements();  
+	public CollectionModel<EvenementBean> listerevenements() {
+		return evenementproxy.listeDesEvenements();
 	}
+
 	@GetMapping("/publications/{id}")
-	public EntityModel<PublicationBean> listerunepublication(@PathVariable Long id)
-	{
+	public EntityModel<PublicationBean> listerunepublication(@PathVariable Long id) {
 		return publicationproxy.recupererUnePublication(id);
-		
+
 	}
+
 	@GetMapping("/outils/{id}")
-	public EntityModel<OutilBean> listeruneoutil(@PathVariable Long id)
-	{
-		return outilProxy.recupererUneoutil(id); 
-		
+	public EntityModel<OutilBean> listeruneoutil(@PathVariable Long id) {
+		return outilProxy.recupererUneoutil(id);
+
 	}
+
 	@GetMapping("/evenements/{id}")
-	public EntityModel<EvenementBean> listeruneevenement(@PathVariable Long id)
-	{
-		return evenementproxy.recupererUneEvenement(id); 
-		
+	public EntityModel<EvenementBean> listeruneevenement(@PathVariable Long id) {
+		return evenementproxy.recupererUneEvenement(id);
+
 	}
+
 	@GetMapping("/publications/auteur/{id}")
-	public List<PublicationBean>listerpublicationbymembre(@PathVariable(name="id") Long idaut)
-	{
-		return memberservice.findPublicationparauteur(idaut);		
+	public List<PublicationBean> listerpublicationbymembre(@PathVariable(name = "id") Long idaut) {
+		return memberservice.findPublicationparauteur(idaut);
 	}
+
 	@GetMapping("/outils/developpeur/{id}")
-	public List<OutilBean>listeroutilbydeveloppeur(@PathVariable(name="id") Long iddev)
-	{
-		return memberservice.findoutilpardeveloppeur(iddev)	; 	
+	public List<OutilBean> listeroutilbydeveloppeur(@PathVariable(name = "id") Long iddev) {
+		return memberservice.findoutilpardeveloppeur(iddev);
 	}
+
 	@GetMapping("/evenements/organisateur/{id}")
-	public List<EvenementBean>listerevenementsbyorganisateur(@PathVariable(name="id") Long idorg)
-	{
-		return memberservice.findevenementparorganisateur(idorg); 	
+	public List<EvenementBean> listerevenementsbyorganisateur(@PathVariable(name = "id") Long idorg) {
+		return memberservice.findevenementparorganisateur(idorg);
 	}
-	
+
 	@GetMapping("/fullmember/{id}")
-	public Membre findAFullMember(@PathVariable(name="id") Long id)
-	{
-		Membre mbr=memberservice.findMember(id);
+	public Membre findAFullMember(@PathVariable(name = "id") Long id) {
+		Membre mbr = memberservice.findMember(id);
 		mbr.setPubs(memberservice.findPublicationparauteur(id));
 		mbr.setEvenements(memberservice.findevenementparorganisateur(id));
 		mbr.setOutils(memberservice.findoutilpardeveloppeur(id));
-		return mbr;		
+		return mbr;
 	}
 
 }

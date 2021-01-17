@@ -68,6 +68,10 @@ public class MemberImpl implements IMemberService {
 	Membre m= (Membre)membreRepository.findById(id).get();
 		return m;
 	}
+	public EnseignantChercheur findEnseignant(Long id) {
+		EnseignantChercheur e = (EnseignantChercheur) membreRepository.findById(id).get();
+		return e; 
+	}
 	public List<Membre> findAll() {
 		
 		return membreRepository.findAll();

@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
-    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
-    <fullyQualifiedTypeName name="com.example.demo.dao.Membrepubrepository"/>
-    <fullyQualifiedTypeName name="com.example.demo.dao.EnseignantChercheurRepository"/>
-    <fullyQualifiedTypeName name="com.example.demo.entities.Membre_Publication"/>
-    <fullyQualifiedTypeName name="com.example.demo.entities.Membre_Pub_Ids"/>
-    <fullyQualifiedTypeName name="com.example.demo.PublicationBean"/>
-    <fullyQualifiedTypeName name="org.springframework.hateoas.EntityModel"/>
-    <fullyQualifiedTypeName name="com.example.demo.dao.MembreRepository"/>
     <fullyQualifiedTypeName name="com.example.demo.dao.EtudiantRepository"/>
     <fullyQualifiedTypeName name="com.example.demo.proxies.PublicationProxy"/>
-    <fullyQualifiedTypeName name="com.example.demo.entities.EnseignantChercheur"/>
     <fullyQualifiedTypeName name="org.springframework.cloud.openfeign.EnableFeignClients"/>
     <fullyQualifiedTypeName name="org.springframework.data.rest.webmvc.RepositoryRestController"/>
     <fullyQualifiedTypeName name="org.springframework.cloud.netflix.ribbon.RibbonClient"/>
@@ -35,10 +25,8 @@
     <fullyQualifiedTypeName name="com.example.demo.entities.Evenement"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
     <fullyQualifiedTypeName name="javax.websocket.server.PathParam"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
     <fullyQualifiedTypeName name="com.example.demo.entity.Publication"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PutMapping"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
     <fullyQualifiedTypeName name="org.springframework.cloud.openfeign.FeignClient"/>
     <fullyQualifiedTypeName name="lombok.Data"/>
     <fullyQualifiedTypeName name="java.io.Serializable"/>
@@ -60,4 +48,16 @@
     <fullyQualifiedTypeName name="com.example.demo.proxies.Evenementproxy"/>
     <fullyQualifiedTypeName name="com.example.demo.OutilBean"/>
     <fullyQualifiedTypeName name="com.example.demo.EvenementBean"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.CrossOrigin"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.DeleteMapping"/>
+    <fullyQualifiedTypeName name="javax.persistence.DiscriminatorValue"/>
+    <fullyQualifiedTypeName name="org.springframework.web.servlet.config.annotation.WebMvcConfigurer"/>
+    <fullyQualifiedTypeName name="org.springframework.context.annotation.Configuration"/>
+    <fullyQualifiedTypeName name="org.springframework.web.servlet.config.annotation.CorsRegistry"/>
+    <fullyQualifiedTypeName name="org.hibernate.annotations.CascadeType"/>
+    <fullyQualifiedTypeName name="javax.persistence.CascadeType"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
+    <fullyQualifiedTypeName name="com.example.demo.entities.EnseignantChercheur"/>
+    <fullyQualifiedTypeName name="com.example.demo.entities.Etudiant"/>
 </qualifiedTypeNameHistroy>

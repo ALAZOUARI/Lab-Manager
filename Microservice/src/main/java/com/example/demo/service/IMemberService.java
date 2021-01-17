@@ -18,6 +18,7 @@ public interface IMemberService {
 	public Membre updateMember(Membre p);
 
 	public Membre findMember(Long id);
+	public EnseignantChercheur findEnseignant(Long id);
 
 	public List<Membre> findAll();
 

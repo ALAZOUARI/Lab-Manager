@@ -2,7 +2,7 @@ package com.example.demo.entities;
 
 import java.util.Date;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -24,7 +24,7 @@ public class Etudiant extends Membre {
 	@Temporal(TemporalType.DATE)
 	private Date dateInscription ; 
 	private String diplome ;
-	@ManyToOne
+	@ManyToOne()
 	private EnseignantChercheur encadrant ; 
 
 	@Builder
