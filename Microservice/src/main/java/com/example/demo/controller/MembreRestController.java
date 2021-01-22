@@ -62,6 +62,10 @@ public class MembreRestController {
 	public Membre addMembre(@RequestBody Etudiant etd) {
 		return memberservice.addMember(etd);
 	}
+	@PostMapping(value = "/membres")
+	public Membre addMembre(@RequestBody Membre etd) {
+		return memberservice.addMember(etd);
+	}
 
 	@PostMapping(value = "/membres/enseignant")
 	public Membre addMembre(@RequestBody EnseignantChercheur ens) {
@@ -118,7 +122,7 @@ public class MembreRestController {
 
 		memberservice.affecterorganisateurToevt(idorg, idevt);
 	}
-
+	
 	@GetMapping("/publications")
 	public CollectionModel<PublicationBean> listerpublication() {
 		return publicationproxy.listeDesPublications();
